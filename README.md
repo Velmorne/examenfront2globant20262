@@ -149,27 +149,7 @@ No se aceptarán 50 productos completamente idénticos en los que solamente camb
 
 ---
 
-# Prompt sugerido para generar el JSON
-
-Puedes utilizar el siguiente prompt en un agente de inteligencia artificial:
-
-```text
-Genera un arreglo de JavaScript con exactamente 50 productos tecnológicos.
-
-Cada producto debe ser un objeto con los siguientes atributos:
-
-- id
-- nombre
-- categoria
-- marca
-- precio
-- stock
-- proveedor
-- fechaIngreso
-- disponible
-- imagen
-
-Condiciones:
+## Condiciones:
 
 1. El id debe ser único y consecutivo.
 2. El precio debe ser un número entero sin símbolos de moneda.
@@ -203,19 +183,6 @@ La inteligencia artificial puede utilizarse para:
 * Obtener ideas de diseño.
 * Crear imágenes o textos de prueba.
 
-La inteligencia artificial no reemplaza la explicación del estudiante.
-
-El estudiante deberá estar en capacidad de explicar:
-
-* Cómo se recorre el arreglo.
-* Cómo se crean los elementos HTML.
-* Cómo se agrega contenido al DOM.
-* Cómo funcionan los eventos implementados.
-* Cómo se aplican filtros o búsquedas, en caso de utilizarlos.
-* Qué partes del proyecto fueron desarrolladas o apoyadas mediante IA.
-
-El docente podrá solicitar una explicación breve del código entregado.
-
 ---
 
 # Funcionalidades obligatorias
@@ -225,7 +192,6 @@ El docente podrá solicitar una explicación breve del código entregado.
 Los productos deberán recorrerse mediante JavaScript utilizando alguna de las siguientes alternativas:
 
 * `for`
-* `for...of`
 * `forEach()`
 * `map()`
 
@@ -279,28 +245,6 @@ La tabla deberá mostrar como mínimo:
 * Stock.
 * Disponibilidad.
 
-Ejemplo de estructura:
-
-```html
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Producto</th>
-      <th>Categoría</th>
-      <th>Marca</th>
-      <th>Precio</th>
-      <th>Stock</th>
-      <th>Estado</th>
-    </tr>
-  </thead>
-
-  <tbody id="productos-container">
-    <!-- Contenido generado desde JavaScript -->
-  </tbody>
-</table>
-```
-
 ### Opción B: tarjetas dinámicas
 
 Cada tarjeta deberá mostrar como mínimo:
@@ -313,38 +257,9 @@ Cada tarjeta deberá mostrar como mínimo:
 * Stock.
 * Disponibilidad.
 
-Ejemplo del contenedor:
-
-```html
-<section id="productos-container" class="productos-grid">
-  <!-- Tarjetas generadas desde JavaScript -->
-</section>
-```
-
 El uso de tarjetas correctamente diseñadas otorgará puntos adicionales.
 
----
 
-## 4. Formato de precios
-
-Los precios deberán mostrarse utilizando un formato de moneda legible.
-
-Ejemplo:
-
-```javascript
-const precioFormateado = producto.precio.toLocaleString("es-CO", {
-  style: "currency",
-  currency: "COP"
-});
-```
-
-Resultado esperado:
-
-```text
-$289.900
-```
-
----
 
 ## 5. Disponibilidad
 
@@ -352,48 +267,10 @@ El valor booleano de `disponible` no debe mostrarse solamente como `true` o `fal
 
 Debe transformarse en un texto comprensible para el usuario.
 
-Ejemplo:
-
-```javascript
-const estado = producto.disponible
-  ? "Disponible"
-  : "No disponible";
-```
-
-Se recomienda representar visualmente el estado mediante clases CSS:
-
-```css
-.disponible {
-  color: green;
-}
-
-.no-disponible {
-  color: red;
-}
-```
-
----
 
 ## 6. Contador de productos
 
 La aplicación deberá mostrar la cantidad de productos cargados.
-
-Ejemplo:
-
-```html
-<p>
-  Productos encontrados:
-  <strong id="contador-productos">0</strong>
-</p>
-```
-
-El valor deberá actualizarse desde JavaScript:
-
-```javascript
-contadorProductos.textContent = productos.length;
-```
-
----
 
 ## 7. Evento obligatorio
 
@@ -410,141 +287,16 @@ Puedes seleccionar una de las siguientes opciones:
 * Botón para cambiar entre tabla y tarjetas.
 * Botón para consultar los detalles de un producto.
 
-Ejemplo:
-
-```javascript
-const botonMostrar = document.querySelector("#btn-mostrar");
-
-botonMostrar.addEventListener("click", () => {
-  mostrarProductos(productos);
-});
-```
-
 ---
 
 # Recomendaciones de implementación
 
 ## Selección de elementos
 
-Utiliza selectores del DOM para acceder a los elementos de la interfaz.
-
-```javascript
-const contenedor = document.querySelector("#productos-container");
-const contador = document.querySelector("#contador-productos");
-const buscador = document.querySelector("#buscador");
-```
-
----
-
 ## Función para mostrar productos
-
-Se recomienda separar la lógica en funciones.
-
-```javascript
-function mostrarProductos(listaProductos) {
-  contenedor.textContent = "";
-
-  listaProductos.forEach((producto) => {
-    // Crear los elementos correspondientes.
-    // Agregar información.
-    // Insertar los elementos en el contenedor.
-  });
-
-  contador.textContent = listaProductos.length;
-}
-```
-
----
-
-## Limpieza del contenedor
-
-Antes de volver a mostrar productos, se debe limpiar el contenido anterior.
-
-```javascript
-contenedor.textContent = "";
-```
-
-Esto evita que los productos se dupliquen cada vez que se ejecuta una búsqueda o filtro.
-
----
 
 ## Carga inicial
 
-La aplicación puede cargar los productos cuando se abra la página.
-
-```javascript
-document.addEventListener("DOMContentLoaded", () => {
-  mostrarProductos(productos);
-});
-```
-
-También se permite utilizar un botón para iniciar la carga.
-
----
-
-# Condiciones técnicas
-
-## HTML
-
-El archivo HTML deberá:
-
-* Utilizar etiquetas semánticas.
-* Tener una estructura organizada.
-* Conectar correctamente los archivos CSS y JavaScript.
-* Tener títulos y textos relacionados con el caso empresarial.
-* Contener los identificadores o clases necesarios para manipular el DOM.
-
-Se recomienda utilizar:
-
-```html
-<header>
-<nav>
-<main>
-<section>
-<article>
-<footer>
-```
-
----
-
-## CSS
-
-El archivo CSS deberá:
-
-* Estar separado del HTML.
-* Utilizar clases.
-* Aplicar estilos al encabezado, contenido principal y pie de página.
-* Organizar adecuadamente la tabla o las tarjetas.
-* Incluir estados visuales para productos disponibles y no disponibles.
-* Mantener legibilidad y coherencia visual.
-
-Se valorará:
-
-* Uso de Flexbox.
-* Uso de CSS Grid.
-* Diseño adaptable.
-* Estados `hover`.
-* Uso coherente de colores.
-* Tipografía legible.
-* Espaciado consistente.
-* Buena presentación de imágenes.
-
----
-
-## JavaScript
-
-El archivo JavaScript deberá:
-
-* Estar separado del HTML.
-* Seleccionar elementos del DOM.
-* Recorrer el arreglo de productos.
-* Crear o insertar elementos dinámicamente.
-* Actualizar el contenido de la página.
-* Implementar al menos un evento.
-* Evitar duplicar información.
-* Organizar la lógica mediante funciones.
-
----
 
 # Entregables
 
@@ -560,67 +312,6 @@ El repositorio de GitHub deberá contener:
 
 ---
 
-# Contenido mínimo del README
-
-El archivo `README.md` del estudiante deberá incluir:
-
-```markdown
-# TechStore
-
-Aplicación web desarrollada como examen práctico de Front-End para demostrar el manejo del DOM y la carga dinámica de información desde JavaScript.
-
-## Funcionalidades
-
-- Visualización dinámica de productos.
-- Carga de información desde un arreglo de objetos.
-- Contador de productos.
-- Formato de precios.
-- Identificación de disponibilidad.
-- Interacción mediante eventos del DOM.
-
-## Tecnologías utilizadas
-
-- HTML5
-- CSS3
-- JavaScript
-
-## Autor
-
-Nombre del estudiante:
-
-Grupo:
-
-## Enlace del proyecto
-
-GitHub Pages:
-```
-
----
-
-# Publicación en GitHub Pages
-
-El proyecto deberá publicarse mediante GitHub Pages.
-
-Pasos generales:
-
-1. Crear un repositorio público en GitHub.
-2. Subir todos los archivos del proyecto.
-3. Ingresar a la sección `Settings`.
-4. Seleccionar `Pages`.
-5. Elegir la rama principal.
-6. Guardar la configuración.
-7. Esperar la generación del enlace.
-8. Verificar que la aplicación cargue correctamente.
-
-El estudiante deberá entregar:
-
-```text
-URL del repositorio:
-
-URL de GitHub Pages:
-```
-
----
 
 # Criterios de evaluación
 
@@ -634,7 +325,7 @@ URL de GitHub Pages:
 | Renderizado de información | Visualización correcta de los datos en tabla o estructura equivalente |      10 |
 | Eventos                    | Implementación funcional de al menos un evento                        |      10 |
 | Organización del código    | Uso de funciones, nombres claros y separación de responsabilidades    |       5 |
-| Repositorio y README       | Organización del repositorio, documentación y GitHub Pages            |       5 |
+| Repositorio                | Organización del repositorio, documentación y GitHub Pages            |       5 |
 | Funcionamiento general     | La aplicación carga y funciona sin errores críticos                   |       5 |
 | **Total**                  |                                                                       | **100** |
 
@@ -654,172 +345,5 @@ Se podrán obtener hasta **10 puntos adicionales**.
 
 Los puntos adicionales no reemplazan los requerimientos obligatorios.
 
----
 
-# Posibles descuentos
-
-| Situación                                          |                      Descuento |
-| -------------------------------------------------- | -----------------------------: |
-| No presentar exactamente 50 productos              |                      Hasta -10 |
-| Tener menos de 10 atributos por producto           |                      Hasta -10 |
-| Escribir los productos directamente en el HTML     |                      Hasta -20 |
-| No utilizar manipulación del DOM                   |                      Hasta -30 |
-| No implementar ningún evento                       |                      Hasta -10 |
-| Proyecto sin estilos CSS propios                   |                      Hasta -15 |
-| Enlace de GitHub Pages sin funcionamiento          |                       Hasta -5 |
-| Código copiado que el estudiante no puede explicar |                  Según el caso |
-| Entrega posterior al tiempo establecido            | Según indicaciones del docente |
-
----
-
-# Distribución sugerida del tiempo
-
-## Primera etapa: análisis y estructura
-
-**Tiempo sugerido: 20 minutos**
-
-* Leer el caso empresarial.
-* Crear el repositorio.
-* Organizar las carpetas.
-* Definir la estructura de la interfaz.
-
-## Segunda etapa: HTML y CSS
-
-**Tiempo sugerido: 50 minutos**
-
-* Construir la estructura HTML.
-* Diseñar encabezado, sección principal y pie de página.
-* Crear los estilos de la tabla o tarjetas.
-
-## Tercera etapa: conjunto de datos
-
-**Tiempo sugerido: 20 minutos**
-
-* Utilizar un agente de inteligencia artificial.
-* Generar los 50 productos.
-* Revisar que tengan los 10 atributos.
-* Corregir errores de sintaxis.
-
-## Cuarta etapa: JavaScript y DOM
-
-**Tiempo sugerido: 60 minutos**
-
-* Seleccionar los elementos.
-* Recorrer el arreglo.
-* Crear los elementos.
-* Agregar los productos al DOM.
-* Mostrar el contador.
-* Formatear precios y disponibilidad.
-
-## Quinta etapa: eventos y mejoras
-
-**Tiempo sugerido: 20 minutos**
-
-* Implementar el evento obligatorio.
-* Agregar búsquedas, filtros o tarjetas.
-
-## Sexta etapa: pruebas y publicación
-
-**Tiempo sugerido: 10 minutos**
-
-* Revisar errores en consola.
-* Validar enlaces.
-* Subir cambios a GitHub.
-* Comprobar GitHub Pages.
-
----
-
-# Lista de verificación
-
-Antes de entregar, verifica lo siguiente:
-
-* [ ] El repositorio es público.
-* [ ] El proyecto contiene HTML, CSS y JavaScript.
-* [ ] Existen exactamente 50 productos.
-* [ ] Cada producto tiene mínimo 10 atributos.
-* [ ] Los productos se cargan desde JavaScript.
-* [ ] Los productos no están escritos directamente en el HTML.
-* [ ] Se utiliza manipulación del DOM.
-* [ ] Se recorre correctamente el arreglo.
-* [ ] Se muestra un contador de productos.
-* [ ] Los precios tienen un formato legible.
-* [ ] La disponibilidad se muestra como texto.
-* [ ] Existe al menos un evento funcional.
-* [ ] La tabla o las tarjetas tienen estilos CSS.
-* [ ] La consola del navegador no presenta errores críticos.
-* [ ] El proyecto tiene un archivo README.
-* [ ] El enlace de GitHub Pages funciona.
-* [ ] El nombre del estudiante aparece en el proyecto.
-
----
-
-# Preguntas de sustentación
-
-El docente podrá seleccionar algunas de las siguientes preguntas:
-
-1. ¿Qué es el DOM?
-2. ¿Cómo seleccionaste el contenedor de productos?
-3. ¿Qué método utilizaste para recorrer el arreglo?
-4. ¿Cuál es la diferencia entre `textContent` e `innerHTML`?
-5. ¿Cómo creaste los elementos de cada producto?
-6. ¿Qué función utilizaste para mostrar los productos?
-7. ¿Por qué limpiaste el contenedor antes de renderizar?
-8. ¿Cómo funciona el evento implementado?
-9. ¿Cómo realizaste el formato de los precios?
-10. ¿Cómo transformaste los valores booleanos de disponibilidad?
-11. ¿Qué ocurriría si el arreglo estuviera vacío?
-12. ¿Qué parte de la solución fue apoyada por inteligencia artificial?
-13. ¿Qué modificarías para agregar un nuevo producto?
-14. ¿Cómo implementarías un filtro por categoría?
-15. ¿Cómo publicarías una nueva versión en GitHub Pages?
-
----
-
-# Resultado esperado
-
-Al abrir la aplicación, el usuario deberá encontrar una interfaz relacionada con la empresa **TechStore**.
-
-La página deberá cargar dinámicamente los 50 productos y presentarlos de manera organizada.
-
-La aplicación deberá mostrar:
-
-* Información general de la empresa.
-* Cantidad de productos encontrados.
-* Nombre de cada producto.
-* Categoría.
-* Marca.
-* Precio.
-* Stock.
-* Estado de disponibilidad.
-* Imágenes o elementos visuales.
-* Al menos una interacción funcional.
-
-La interfaz deberá ser clara, navegable y visualmente coherente.
-
----
-
-# Reglas finales
-
-1. El trabajo es individual.
-2. El tiempo máximo es de 3 horas.
-3. El estudiante puede consultar documentación.
-4. Se permite utilizar agentes de inteligencia artificial.
-5. El estudiante es responsable de revisar y comprender el código generado.
-6. No se permite copiar el proyecto completo de otro estudiante.
-7. La información deberá cargarse dinámicamente.
-8. El uso del DOM es obligatorio.
-9. La entrega deberá realizarse mediante GitHub.
-10. El proyecto debe funcionar desde GitHub Pages.
-
----
-
-## Mensaje final
-
-Este examen no busca evaluar únicamente que la página se vea bonita.
-
-El propósito principal es demostrar que puedes tomar información estructurada, recorrerla, transformarla y convertirla dinámicamente en elementos visibles dentro de una aplicación web.
-
-La inteligencia artificial puede ayudarte a generar datos o resolver dudas, pero tú debes tomar las decisiones, organizar el código y explicar cómo funciona la solución.
-
-**Convierte los datos en una experiencia web funcional.**
 
